@@ -14,7 +14,7 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Mr. Driveways - Best Concrete Driveways Birmingham">
     <meta property="og:description" content="Professional concrete driveways in Birmingham. Get free quote with AI design preview!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1600585154526-990dced4db0d">
+    <meta property="og:image" content="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg">
     <meta property="og:url" content="https://mr-driveways.vercel.app">
     <meta property="og:type" content="website">
     
@@ -33,7 +33,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Mr. Driveways",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d",
+        "image": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Birmingham City Centre",
@@ -106,11 +106,11 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d" alt="Concrete Driveway Birmingham" loading="lazy">
+                <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg" alt="Concrete Driveway Birmingham" loading="lazy">
             </div>
         </section>
 
-        <!-- AI Generated Images Section (Only Driveways) -->
+        <!-- AI Generated Images Section -->
         <section class="ai-image-section">
             <h2 class="section-title">✨ AI Generated Driveway Designs</h2>
             <p class="section-subtitle">New designs every 24 hours - See your dream driveway!</p>
@@ -156,10 +156,10 @@
             </div>
         </section>
 
-        <!-- Concrete Calculator Section (Birmingham Prices) -->
+        <!-- Concrete Calculator Section (UPDATED - No Depth) -->
         <section id="calculator" class="calculator-section">
-            <h2 class="section-title">🧮 Concrete Calculator</h2>
-            <p class="section-subtitle">Calculate concrete quantity and price estimate for your driveway (Birmingham rates)</p>
+            <h2 class="section-title">🧮 Driveway Cost Calculator</h2>
+            <p class="section-subtitle">Estimate your driveway price (£80 - £100 per m² including material & labour)</p>
             
             <div class="calculator-container">
                 <div class="calculator-inputs">
@@ -172,45 +172,41 @@
                         <input type="number" id="width" placeholder="e.g., 5" min="0" step="0.1" required>
                     </div>
                     <div class="input-group">
-                        <label>Depth (mm)</label>
-                        <input type="number" id="depth" placeholder="e.g., 100" min="50" max="300" value="100">
-                    </div>
-                    <div class="input-group">
                         <label>Driveway Type</label>
-                        <select id="grade">
+                        <select id="drivewayType">
                             <option value="standard">Standard Concrete Driveway</option>
                             <option value="imprinted">Imprinted/Patterned Concrete</option>
-                            <option value="reinforced">Reinforced Heavy Duty</option>
+                            <option value="premium">Premium Finish</option>
                         </select>
                     </div>
-                    <button onclick="calculateConcrete()" class="calculate-btn">
+                    <button onclick="calculateEstimate()" class="calculate-btn">
                         <i class="fas fa-calculator"></i> Calculate Estimate
                     </button>
                 </div>
                 
                 <div class="calculator-result" id="calculatorResult" style="display: none;">
-                    <h3>📊 Estimated Cost Breakdown</h3>
+                    <h3>📊 Estimated Cost</h3>
                     <div class="result-item">
                         <span>Driveway Area:</span>
                         <strong><span id="area">0</span> m²</strong>
                     </div>
                     <div class="result-item">
-                        <span>Concrete Volume:</span>
-                        <strong><span id="volume">0</span> m³</strong>
+                        <span>Price Range:</span>
+                        <strong>£80 - £100 per m²</strong>
                     </div>
                     <div class="result-item">
-                        <span>Material Cost:</span>
-                        <strong>£<span id="materialCost">0</span></strong>
+                        <span>Estimated Cost (Min):</span>
+                        <strong>£<span id="costMin">0</span></strong>
                     </div>
                     <div class="result-item">
-                        <span>Labour Cost:</span>
-                        <strong>£<span id="labourCost">0</span></strong>
+                        <span>Estimated Cost (Max):</span>
+                        <strong>£<span id="costMax">0</span></strong>
                     </div>
                     <div class="result-item total">
-                        <span>Total Estimate:</span>
-                        <strong>£<span id="totalCost">0</span></strong>
+                        <span>Average Estimate:</span>
+                        <strong>£<span id="costAvg">0</span></strong>
                     </div>
-                    <p class="result-note">*Approximate estimate based on Birmingham rates. Contact us for exact quote.</p>
+                    <p class="result-note">⚠️ This is an estimated price. Final quote may vary based on site conditions, access, and specific requirements. Contact us for an exact quote.</p>
                 </div>
             </div>
         </section>
@@ -275,7 +271,7 @@
             </div>
         </section>
 
-        <!-- TikTok Videos Feed - Real Videos -->
+        <!-- TikTok Videos Feed -->
         <section class="tiktok-section">
             <div class="tiktok-header">
                 <h2 class="section-title">🎥 Watch Our Work on TikTok</h2>
@@ -294,71 +290,24 @@
             <h2 class="section-title">📸 Our Driveway Projects</h2>
             <p class="section-subtitle">Recent concrete driveway installations in Birmingham</p>
             
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d" alt="Imprinted Concrete Driveway">
-                    <div class="gallery-overlay">
-                        <span>Imprinted Concrete</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600585154343-ce5ff4b1e7e2" alt="Patterned Driveway">
-                    <div class="gallery-overlay">
-                        <span>Patterned Concrete</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1574285013029-29296a71930e" alt="Front Drive Installation">
-                    <div class="gallery-overlay">
-                        <span>Front Drive</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a" alt="Coloured Concrete Driveway">
-                    <div class="gallery-overlay">
-                        <span>Coloured Concrete</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1" alt="Block Paving Driveway">
-                    <div class="gallery-overlay">
-                        <span>Block Paving</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00" alt="Resin Bound Driveway">
-                    <div class="gallery-overlay">
-                        <span>Resin Bound</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed" alt="Gravel Driveway">
-                    <div class="gallery-overlay">
-                        <span>Gravel Driveway</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1625604029987-20d2ff0c8b1a" alt="Modern Driveway Design">
-                    <div class="gallery-overlay">
-                        <span>Modern Design</span>
-                    </div>
-                </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery images will be loaded here -->
             </div>
         </section>
 
-        <!-- Fencing & Gardening Section (Optional) -->
+        <!-- Fencing & Gardening Section -->
         <section id="landscaping" class="landscaping-section">
             <h2 class="section-title">🌳 Additional Services</h2>
             <p class="section-subtitle">Complete your driveway with professional landscaping</p>
             
             <div class="landscaping-grid">
                 <div class="landscaping-card">
-                    <img src="https://images.unsplash.com/photo-1598908318887-5da6f1b4f7d3" alt="Garden Fencing">
+                    <img src="https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg" alt="Garden Fencing">
                     <h3>Garden Fencing</h3>
                     <p>Professional fencing installation to complement your driveway</p>
                 </div>
                 <div class="landscaping-card">
-                    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01" alt="Garden Landscaping">
+                    <img src="https://images.pexels.com/photos/280230/pexels-photo-280230.jpeg" alt="Garden Landscaping">
                     <h3>Garden Landscaping</h3>
                     <p>Complete garden makeover and landscaping services</p>
                 </div>
