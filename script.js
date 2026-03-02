@@ -14,18 +14,18 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// AI Image Generator (Only Driveway Images)
+// ========== AI IMAGES - ONLY DRIVEWAYS ==========
 const aiImages = [
-    'https://images.unsplash.com/photo-1600585154526-990dced4db0d',
-    'https://images.unsplash.com/photo-1600585154343-ce5ff4b1e7e2',
-    'https://images.unsplash.com/photo-1574285013029-29296a71930e',
-    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a',
-    'https://images.unsplash.com/photo-1558036117-15d82a90b9b1',
-    'https://images.unsplash.com/photo-1605146769289-440113cc3d00',
-    'https://images.unsplash.com/photo-1615874959474-d609969a20ed',
-    'https://images.unsplash.com/photo-1625604029987-20d2ff0c8b1a',
-    'https://images.unsplash.com/photo-1639152201720-5e536d254b81',
-    'https://images.unsplash.com/photo-1641897519440-ee6dbdf10e88'
+    'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
+    'https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg',
+    'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg',
+    'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg',
+    'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg',
+    'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg',
+    'https://images.pexels.com/photos/1396131/pexels-photo-1396131.jpeg',
+    'https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg',
+    'https://images.pexels.com/photos/164522/pexels-photo-164522.jpeg',
+    'https://images.pexels.com/photos/1396109/pexels-photo-1396109.jpeg'
 ];
 
 function getRandomImage() {
@@ -37,14 +37,11 @@ function updateAIImage() {
     const aiImage = document.getElementById('aiImage');
     const updateTime = document.getElementById('imageUpdateTime');
     
-    // Set random image
     aiImage.src = getRandomImage();
     
-    // Update timestamp
     const now = new Date();
     updateTime.textContent = `Updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
     
-    // Save to localStorage
     localStorage.setItem('lastImageUpdate', now.toISOString());
     localStorage.setItem('currentImage', aiImage.src);
 }
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const now = new Date();
         const hoursSinceUpdate = (now - lastUpdateDate) / (1000 * 60 * 60);
         
-        // Update if more than 24 hours
         if (hoursSinceUpdate > 24) {
             updateAIImage();
         } else {
@@ -77,55 +73,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Concrete Calculator (Birmingham Prices)
-function calculateConcrete() {
+// ========== CALCULATOR - UPDATED (No Depth, Price Range) ==========
+function calculateEstimate() {
     const length = parseFloat(document.getElementById('length').value);
     const width = parseFloat(document.getElementById('width').value);
-    const depth = parseFloat(document.getElementById('depth').value) / 1000; // Convert mm to metres
-    const type = document.getElementById('grade').value;
+    const type = document.getElementById('drivewayType').value;
     
     // Validation
-    if (!length || !width || !depth) {
+    if (!length || !width) {
         alert('Please enter length and width');
         return;
     }
     
-    // Calculate area and volume
+    // Calculate area
     const area = length * width;
-    const volume = area * depth;
     
-    // Birmingham prices based on driveway type
-    let pricePerM2;
-    switch(type) {
-        case 'standard':
-            pricePerM2 = 75; // £75 per m² for standard
-            break;
-        case 'imprinted':
-            pricePerM2 = 95; // £95 per m² for imprinted
-            break;
-        case 'reinforced':
-            pricePerM2 = 110; // £110 per m² for reinforced
-            break;
-        default:
-            pricePerM2 = 75;
+    // Price ranges based on driveway type
+    let minPricePerM2 = 80;
+    let maxPricePerM2 = 100;
+    
+    // Adjust for premium types
+    if (type === 'imprinted') {
+        minPricePerM2 = 90;
+        maxPricePerM2 = 110;
+    } else if (type === 'premium') {
+        minPricePerM2 = 100;
+        maxPricePerM2 = 120;
     }
     
     // Calculate costs
-    const materialCost = area * pricePerM2 * 0.6; // 60% material
-    const labourCost = area * pricePerM2 * 0.4; // 40% labour
-    const totalCost = area * pricePerM2;
+    const costMin = area * minPricePerM2;
+    const costMax = area * maxPricePerM2;
+    const costAvg = (costMin + costMax) / 2;
     
     // Display results
     document.getElementById('area').textContent = area.toFixed(2);
-    document.getElementById('volume').textContent = volume.toFixed(2);
-    document.getElementById('materialCost').textContent = materialCost.toFixed(2);
-    document.getElementById('labourCost').textContent = labourCost.toFixed(2);
-    document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+    document.getElementById('costMin').textContent = costMin.toFixed(2);
+    document.getElementById('costMax').textContent = costMax.toFixed(2);
+    document.getElementById('costAvg').textContent = costAvg.toFixed(2);
     
     document.getElementById('calculatorResult').style.display = 'block';
 }
 
-// Image Upload Functionality
+// ========== IMAGE UPLOAD ==========
 document.addEventListener('DOMContentLoaded', function() {
     const uploadArea = document.getElementById('uploadArea');
     const imageUpload = document.getElementById('imageUpload');
@@ -165,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function handleImageUpload(file) {
-    // Check file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
         alert('File size should be less than 10MB');
         return;
@@ -186,7 +175,7 @@ function removeImage() {
     document.getElementById('imageUpload').value = '';
 }
 
-// Quote Form Submission
+// ========== QUOTE FORM ==========
 function submitQuote(event) {
     event.preventDefault();
     
@@ -197,7 +186,6 @@ function submitQuote(event) {
     const size = document.getElementById('size').value;
     const details = document.getElementById('details').value;
     
-    // Create WhatsApp message
     let message = `Hello Mr. Driveways! I need a quote for my driveway:%0A%0A`;
     message += `*Name:* ${name}%0A`;
     message += `*Phone:* ${phone}%0A`;
@@ -206,63 +194,47 @@ function submitQuote(event) {
     message += `*Approx Size:* ${size || 'Not specified'} m²%0A`;
     message += `*Details:* ${details || 'No details provided'}%0A`;
     
-    // Open WhatsApp
     window.open(`https://wa.me/447383555131?text=${message}`, '_blank');
 }
 
-// TikTok Feed - Real Videos from @mr.driveways
+// ========== TIKTOK FEED ==========
 function loadTikTokFeed() {
     const feed = document.getElementById('tiktokFeed');
-    
-    // Clear existing content
     feed.innerHTML = '';
     
-    // Your actual TikTok videos (replace with your real video links)
     const tiktokVideos = [
         {
-            id: 1,
-            url: 'https://www.tiktok.com/@mr.driveways/video/1',
-            thumbnail: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d',
+            thumbnail: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
             description: 'Imprinted concrete driveway installation in Birmingham',
             likes: '1.2K',
             comments: '45'
         },
         {
-            id: 2,
-            url: 'https://www.tiktok.com/@mr.driveways/video/2',
-            thumbnail: 'https://images.unsplash.com/photo-1600585154343-ce5ff4b1e7e2',
+            thumbnail: 'https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg',
             description: 'Satisfying concrete finishing process',
             likes: '2.5K',
             comments: '78'
         },
         {
-            id: 3,
-            url: 'https://www.tiktok.com/@mr.driveways/video/3',
-            thumbnail: 'https://images.unsplash.com/photo-1574285013029-29296a71930e',
+            thumbnail: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg',
             description: 'Before and after - Driveway transformation',
             likes: '3.1K',
             comments: '92'
         },
         {
-            id: 4,
-            url: 'https://www.tiktok.com/@mr.driveways/video/4',
-            thumbnail: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a',
+            thumbnail: 'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg',
             description: 'Patterned concrete driveway installation',
             likes: '4.5K',
             comments: '123'
         },
         {
-            id: 5,
-            url: 'https://www.tiktok.com/@mr.driveways/video/5',
-            thumbnail: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1',
+            thumbnail: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg',
             description: 'Customer review - Happy customer in Birmingham',
             likes: '2.8K',
             comments: '67'
         },
         {
-            id: 6,
-            url: 'https://www.tiktok.com/@mr.driveways/video/6',
-            thumbnail: 'https://images.unsplash.com/photo-1605146769289-440113cc3d00',
+            thumbnail: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg',
             description: 'Imprinted concrete driveway process',
             likes: '5.2K',
             comments: '156'
@@ -291,10 +263,44 @@ function loadTikTokFeed() {
     });
 }
 
-// Load TikTok feed on page load
-document.addEventListener('DOMContentLoaded', loadTikTokFeed);
+// ========== GALLERY ==========
+function loadGallery() {
+    const gallery = document.getElementById('galleryGrid');
+    if (!gallery) return;
+    
+    gallery.innerHTML = '';
+    
+    const galleryImages = [
+        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
+        'https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg',
+        'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg',
+        'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg',
+        'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg',
+        'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg',
+        'https://images.pexels.com/photos/1396131/pexels-photo-1396131.jpeg',
+        'https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg'
+    ];
+    
+    galleryImages.forEach((img, index) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+            <img src="${img}" alt="Driveway Project ${index + 1}" loading="lazy">
+            <div class="gallery-overlay">
+                <span>Driveway Project</span>
+            </div>
+        `;
+        gallery.appendChild(item);
+    });
+}
 
-// Smooth scroll for anchor links
+// Load all on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadTikTokFeed();
+    loadGallery();
+});
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -307,50 +313,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Lazy loading for images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                }
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// SEO Optimization - Add structured data
-function addStructuredData() {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Mr. Driveways",
-        "description": "Professional concrete driveway installation in Birmingham",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Birmingham",
-            "addressCountry": "UK"
-        },
-        "telephone": "+447383555131",
-        "priceRange": "££",
-        "openingHours": "Mo-Su 07:00-20:00",
-        "sameAs": [
-            "https://www.tiktok.com/@mr.driveways"
-        ]
-    });
-    document.head.appendChild(script);
-}
-
-// Add structured data on load
-document.addEventListener('DOMContentLoaded', addStructuredData);
